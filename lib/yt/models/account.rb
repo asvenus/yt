@@ -70,7 +70,6 @@ module Yt
       # @return [Yt::Models::Video] the newly uploaded video.
       def upload_video(path_or_url, params = {})
         file = open path_or_url, 'rb'
-        binding.pry
         session = resumable_sessions.insert file.size, upload_body(params)
 
         session.update(body: file) do |data|
@@ -216,9 +215,8 @@ module Yt
           body[:status] = {}
           status = params[:privacy_status]
           publish_at = params[:publish_at]
-          body[:status].merge({privacyStatus: status}) if status
-          body[:status].merge({publishAt: publish_at}) if publish_at
-          biding.pry
+          body[:status].merge!({privacyStatus: status}) if status
+          body[:status].merge!({publishAt: publish_at}) if publish_at
         end
       end
 

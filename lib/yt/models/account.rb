@@ -216,7 +216,7 @@ module Yt
           status = params[:privacy_status]
           publish_at = params[:publish_at]
           body[:status] = ({privacyStatus: status, publishAt: publish_at}) if status
-          binding.
+          binding.pry
           #body[:status].merge!({privacyStatus: status}) if status
           #body[:status].merge!({publishAt: publish_at}) if publish_at
         end

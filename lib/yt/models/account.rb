@@ -212,13 +212,14 @@ module Yt
           snippet = params.slice :title, :description, :tags, :category_id
           snippet[:categoryId] = snippet.delete(:category_id) if snippet[:category_id]
           body[:snippet] = snippet if snippet.any?
-          #body[:status] = {}
+          body[:status] = {}
           status = params[:privacy_status]
           publish_at = params[:publish_at]
-          body[:status] = ({privacyStatus: status, publishAt: publish_at}) if status
-          binding.pry
-          #body[:status].merge!({privacyStatus: status}) if status
-          #body[:status].merge!({publishAt: publish_at}) if publish_at
+          #body[:status] = ({privacyStatus: status, publishAt: publish_at}) if status
+          body[:status].merge!({privacyStatus: status}) if status
+          body[:status].merge!({publishAt: publish_at}) if publish_at
+          body[:status]
+          binding.
         end
       end
 

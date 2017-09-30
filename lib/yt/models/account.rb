@@ -218,8 +218,9 @@ module Yt
           #body[:status] = ({privacyStatus: status, publishAt: publish_at}) if status
           body[:status].merge!({privacyStatus: status}) if status
           body[:status].merge!({publishAt: publish_at}) if publish_at
+          binding.pry
           body[:status]
-          binding.
+          binding.pry
         end
       end
 

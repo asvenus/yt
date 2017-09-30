@@ -70,6 +70,7 @@ module Yt
       # @return [Yt::Models::Video] the newly uploaded video.
       def upload_video(path_or_url, params = {})
         file = open path_or_url, 'rb'
+        binding.pry
         session = resumable_sessions.insert file.size, upload_body(params)
 
         session.update(body: file) do |data|
@@ -208,9 +209,7 @@ module Yt
       # Tells `has_many :resumable_sessions` what metadata to set in the object
       # associated to the uploaded file.
       def upload_body(params = {})
-        binding.pry
         {}.tap do |body|
-          binding.pry
           snippet = params.slice :title, :description, :tags, :category_id
           snippet[:categoryId] = snippet.delete(:category_id) if snippet[:category_id]
           body[:snippet] = snippet if snippet.any?
@@ -219,6 +218,7 @@ module Yt
           publish_at = params[:publish_at]
           body[:status].merge({privacyStatus: status}) if status
           body[:status].merge({publishAt: publish_at}) if publish_at
+          biding.pry
         end
       end
 
